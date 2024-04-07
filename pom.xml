@@ -10,10 +10,21 @@
     <packaging>war</packaging>
 
     <properties>
+
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--        web-->
         <spring.version>5.3.14</spring.version>
+        <javax.servlet-api>4.0.1</javax.servlet-api>
+        <thymeleaf-spring5>3.1.2.RELEASE</thymeleaf-spring5>
+        <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+        <!--        dataBase-->
+        <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
+        <spring-orm.version>6.1.5</spring-orm.version>
+        <hibernate-core.version>6.4.4.Final</hibernate-core.version>
+        <tomcat-dbcp.version>11.0.0-M18</tomcat-dbcp.version>
+
     </properties>
 
     <dependencies>
@@ -32,7 +43,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <version>${javax.servlet-api}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -40,7 +51,14 @@
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
-            <version>3.1.2.RELEASE</version>
+            <version>${thymeleaf-spring5}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
 
         <!--dataBase-->
@@ -48,28 +66,28 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>6.1.5</version>
+            <version>${spring-orm.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.4.4.Final</version>
+            <version>${hibernate-core.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-dbcp</artifactId>
-            <version>11.0.0-M18</version>
+            <version>${tomcat-dbcp.version}</version>
         </dependency>
 
         <!--Test-->
@@ -82,19 +100,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--всякое-->
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.13.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
 
     </dependencies>
 

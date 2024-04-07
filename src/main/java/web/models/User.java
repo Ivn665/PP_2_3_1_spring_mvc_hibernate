@@ -1,7 +1,7 @@
-package web.model;
+package web.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "Users")
@@ -10,17 +10,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "First name should not be empty")
-    @Size(min = 2, max = 30, message = "First name should be between 2 and 30 characters")
+    @Column(name = "Name")
     private String firstName;
 
-    @NotEmpty(message = "Last name should not be empty")
-    @Size(min = 2, max = 30, message = "Last name should be between 2 and 30 characters")
+    @Column (name = "last_Name")
     private String lastName;
 
-    @Min(value = 0, message = "Age should be greater than 0")
+    @Column
     private byte age;
 
+    @Column (name = "Social_Rating")
     private int socRating;
 
     public User() {

@@ -1,56 +1,45 @@
 package web.dao;
 
 
-import jakarta.persistence.TypedQuery;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import web.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import web.models.User;
+
 @Repository
+@Component
 public class UserDaoImpl implements UserDao {
 
-    private SessionFactory sessionFactory;
-
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-
-        this.sessionFactory = sessionFactory;
-        addUser(new User("Jackie", "Chan", (byte) 69, 100));
-        addUser(new User("Bruce", "Lee", (byte) 32, -100));
-        addUser(new User("Steven", "Seagal", (byte) 71, 10));
-        addUser(new User("Gordon", "Liu", (byte) 72, -200));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> allUsers() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from User");
-        return query.getResultList();
+        return entityManager.createQuery("from User").getResultList();
     }
 
     @Override
     public void addUser(User user) {
-        sessionFactory.getCurrentSession().persist(user);
-    }
-
-    @Override
-    public void deleteUser(long id) {
-        sessionFactory.getCurrentSession()
-                .createQuery("delete from User where id = :id")
-                .setParameter("id", id).executeUpdate();
+        entityManager.persist(user);
     }
 
     @Override
     public void editUser(User user) {
-        sessionFactory.getCurrentSession().update(user);
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        entityManager.createQuery("DELETE User WHERE id = :id").setParameter("id", id).executeUpdate();
     }
 
     @Override
     public User getById(long id) {
-        return sessionFactory.getCurrentSession().get(User.class, id);
+        return entityManager.find(User.class, id);
     }
 }

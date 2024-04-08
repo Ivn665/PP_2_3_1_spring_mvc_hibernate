@@ -74,7 +74,7 @@
                     <version>3.13.0</version>
                 </dependency>-->
 
-<!--        &lt;!&ndash; Bean Validation API and RI &ndash;&gt;
+        <!-- Bean Validation API and RI -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -84,7 +84,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.1.Final</version>
-        </dependency>-->
+        </dependency>
 
     </dependencies>
 

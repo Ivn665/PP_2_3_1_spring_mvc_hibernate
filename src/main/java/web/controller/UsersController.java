@@ -1,8 +1,10 @@
 package web.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.models.User;
 import web.service.UserService;
@@ -40,9 +42,14 @@ public class UsersController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") User user) {
-        userService.addUser(user);
-        return "redirect:/";
+    public String createUser(@ModelAttribute("user") @Valid User user
+            , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new";
+        } else {
+            userService.addUser(user);
+            return "redirect:/";
+        }
     }
 
     @GetMapping(value = "/edit")
@@ -53,9 +60,14 @@ public class UsersController {
 
 
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") User user) {
-        userService.editUser(user);
-        return "redirect:/";
+    public String editUser(@ModelAttribute("user") @Valid User user
+            , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        } else {
+            userService.editUser(user);
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/delete")

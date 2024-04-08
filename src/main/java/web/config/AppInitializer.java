@@ -4,10 +4,10 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterRegistration;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -15,11 +15,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     // Метод, указывающий на класс конфигурации
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
-    }
-/*    protected Class<?>[] getRootConfigClasses() {
         return new Class[]{HibernateConfig.class};
-    }*/
+    }
 
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp
     @Override
@@ -32,6 +29,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
 
     @Override
     protected Filter[] getServletFilters() {

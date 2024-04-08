@@ -11,11 +11,19 @@ import web.service.UserService;
 @Controller
 public class UsersController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UsersController(UserService userService) {
+
         this.userService = userService;
+
+        if (userService.allUsers().isEmpty()) {
+            userService.addUser(new User("Jackie", "Chan", (byte) 69, 100));
+            userService.addUser(new User("Bruce", "Lee", (byte) 32, -100));
+            userService.addUser(new User("Steven", "Seagal", (byte) 71, 10));
+            userService.addUser(new User("Gordon", "Liu", (byte) 72, -200));
+        }
     }
 
     //устанавливаем соответствие между адресом страницы и файлом представления
@@ -38,7 +46,7 @@ public class UsersController {
     }
 
     @GetMapping(value = "/edit")
-    public String editPage(@RequestParam long id, Model model) {
+    public String editPage(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "edit";
     }
@@ -51,7 +59,7 @@ public class UsersController {
     }
 
     @GetMapping("/delete")
-    public String deleteUser(@RequestParam long id) {
+    public String deleteUser(@RequestParam("id") long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }

@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -44,12 +45,10 @@ public class HibernateConfig {
     @Bean
     public DataSource getDataSource() {
         BasicDataSource ds = new BasicDataSource();
-
         ds.setDriverClassName(env.getRequiredProperty("db.driver"));
         ds.setUrl(env.getRequiredProperty("db.url"));
         ds.setUsername(env.getRequiredProperty("db.username"));
         ds.setPassword(env.getRequiredProperty("db.password"));
-
         return ds;
     }
 
@@ -69,5 +68,10 @@ public class HibernateConfig {
         JpaTransactionManager manager = new JpaTransactionManager();
         manager.setEntityManagerFactory(getEntityManagerFactory().getObject());
         return manager;
+    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 }

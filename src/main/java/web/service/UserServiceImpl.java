@@ -8,7 +8,6 @@ import web.models.User;
 
 import java.util.List;
 
-//@Service
 @Service
 public class UserServiceImpl implements UserService{
 

@@ -18,7 +18,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new Class[]{HibernateConfig.class};
     }
 
-    // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp
+    // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения html
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{WebConfig.class};
@@ -29,7 +29,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
 
     @Override
     protected Filter[] getServletFilters() {

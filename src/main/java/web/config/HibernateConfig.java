@@ -7,7 +7,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,8 +25,12 @@ import java.util.Properties;
 @PropertySource(value = "classpath:db.properties")
 public class HibernateConfig {
     //связывает с файлом db.properties
+    private final Environment env;
+
     @Autowired
-    private Environment env;
+    public HibernateConfig(Environment env) {
+        this.env = env;
+    }
 
 
     public Properties getHibernateProps() {
@@ -70,8 +73,8 @@ public class HibernateConfig {
         return manager;
     }
 
-    @Bean
+ /*   @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
-    }
+    }*/
 }
